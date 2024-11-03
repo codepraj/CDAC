@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Paragraph Modifier</title>
+    <style>
+        /* Body styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #a1c4fd, #355462);
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Heading styling */
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Paragraph styling */
+        #myParagraph {
+            font-size: 18px;
+            color: #555;
+            max-width: 600px;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 5px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: rgb(0,0, 0,0.3);
+            margin-bottom: 20px;
+        }
+        .highlight {
+            font-weight: bold;
+            color:green;
+            text-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1> Paragraph Style Modifier</h1>
+
+    <!-- Paragraph element -->
+    <p id="myParagraph">It is rightly said that being disciplined is essential in life. When a person leads a disciplined life, they set an casy path to success. They will develop an approach to happiness and a beautiful future ahead. Being disciplined is the practice of having a scheduled daily routine which helps an individual to be punctual and hard-working. An individual is taught what being disciplined means from the time they are young. Even though discipline takes a lot of effort, the advantages of a disciplined life make it a worthwhile endeavour.</p>
+
+    <!-- Submit Button -->
+    <button onclick="modifyParagraphStyle()">Modify Style</button>
+
+    <div class="container" style="margin-bottom: 5px;">
+        <form>
+            <label>Enter Name</label><br>
+            <input type="text" id="name"><br><br>
+            <label>Enter Surname</label><br>
+            <input type="text" id="surname"><br><br>
+            <label>Enter Address</label><br>
+            <input type="text" id="address"><br><br>
+            <label>Enter City</label><br>
+            <input type="text" id="city"><br><br>
+
+            <input type="button" style="background-color: red; color: #333; box-shadow:black 2px 2px;"  onclick="printdata()" value="Click me">
+        </form>
+
+    </div>
+   
+    <p id="names"> </p>
+    <p id="surnames"> </p>
+    <p id="addresss"></p>
+    <p id="citys"></p>
+
+    <div class="container">
+        <select id="drop">
+            <option value="os">Operating System</option>
+            <option value="java">Object oriented Prog. Java</option>
+            <option value="ds">Data Structure</option>
+            <option value="dbt">DataBase Technology</option>
+        </select>
+
+        <button type="button" id="rm" onclick="remove()">Remove</button>
+
+    </div>
+    <div>
+        <a id="highlightLink" style="color: blue; margin-top: 10px; padding: 10px;">[ on mouse over bold words of the following paragraph will be highlighted ]</a>
+        <p id="content">We have just start this section (Beginning to Intermediate) who Want to work with Various JavaScript Problems and write scripts online to test their JavScript skill.</p>
+    </div>
+    <script>
+        function remove(){
+            var item = document.getElementById("drop");
+            item.remove(item.selectedIndex);
+        }
+        function modifyParagraphStyle() {
+            
+            let paragraph = document.getElementById("myParagraph");
+
+            
+            paragraph.textContent = "It is rightly said that being disciplined is essential in life. When a person leads a disciplined life, they set an casy path to success. They will develop an approach to happiness and a beautiful future ahead. Being disciplined is the practice of having a scheduled daily routine which helps an individual to be punctual and hard-working. An individual is taught what being disciplined means from the time they are young. Even though discipline takes a lot of effort, the advantages of a disciplined life make it a worthwhile endeavour.";
+
+            if(paragraph.style.fontSize === "18px"){
+           
+            paragraph.style.fontFamily = "'Courier New', monospace";
+            paragraph.style.fontSize = "22px";
+            paragraph.style.color = "#1d4ed8";
+            paragraph.style.backgroundColor = "#e0f7fa";
+            paragraph.style.borderColor = "#81d4fa";
+            }else{
+                paragraph.style.fontSize = "18px";
+            }
+            
+        }
+        function printdata(){
+            const name = document.getElementById("name");
+            const surname = document.getElementById("surname");
+            const address = document.getElementById("address");
+            const city = document.getElementById("city");
+
+            document.getElementById("names").innerHTML = "Name : "+name.value;
+            document.getElementById("surnames").innerHTML ="Surname : " + surname.value;
+            document.getElementById("addresss").innerHTML = "Address : "+address.value;
+            document.getElementById("citys").innerHTML = "City : "+city.value;
+        }
+
+        // Specify words to bold on hover
+    const wordsToHighlight = ["We", "this", "Beginner","want","problems","test","skill"];
+    const paragraph = document.getElementById("content");
+    const link = document.getElementById("highlightLink");
+
+        function highlightWords() {
+        let modifiedText = paragraph.innerHTML;
+
+        wordsToHighlight.forEach(word => {
+            const regex = new RegExp(`\\b(${word})\\b`, "g");
+            modifiedText = modifiedText.replace(regex, `<span class="highlight">$1</span>`);
+        });
+
+        paragraph.innerHTML = modifiedText;
+    }
+
+    // Function to remove bold tags
+    function removeHighlight() {
+        paragraph.innerHTML = paragraph.textContent;
+    }
+
+    // Event listeners for mouse hover
+    link.addEventListener("mouseover", highlightWords);
+    link.addEventListener("mouseout", removeHighlight);
+    </script>
+
+</body>
+</html>
